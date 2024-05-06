@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+input {
+  all: initial;
+  font-family: Arial, sans-serif;
+}
+header {
+  padding-inline: 10%;
+  width: 100%;
+  border-bottom: 1px solid;
+}
+header > div {
+  margin-block: 16px;
+  font-size: large;
+}
+.container {
+  width: 80%;
+  margin: auto;
+  margin-top: 16px;
+}
+.container h3 {
+  padding-block: 16px;
+}
+#create-post input {
+  padding: 4px;
+  border-bottom: 1px solid gray;
+}
+#create-post textarea {
+  padding: 8px;
+  resize: none;
+  width: 50%;
+  height: 150px;
+  font-size: medium;
+}
+#create-post label {
+  display: inline-block;
+  vertical-align: top;
+  width: 45px;
+}
+#create-post {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#create-post button {
+  width: 100px;
+  height: 25px;
+  margin-left: 48px;
+}
+hr {
+  margin-top: 16px;
+}
+.hide {
+  display: none;
+}
+.posts {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  gap: 16px;
+}
+.post {
+  padding: 8px;
+  border-bottom: 1px solid;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.body-post {
+  flex-grow: 1;
+}
