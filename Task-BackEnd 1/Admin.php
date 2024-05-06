@@ -45,6 +45,7 @@ if (isset($_POST['create'])) {
 <body>
     <header>
         <div>Welcome <?php echo $_SESSION['admin_name'] ?></div>
+        <a href="logout.php"><small>Logout</small></a>
     </header>
     <div class="container">
         <h3>Create Post</h3>

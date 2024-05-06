@@ -27,16 +27,14 @@ $nextPage = $pageNumber < $totalPages ? "?page=" . ($pageNumber + 1) : "#";
 
 <body>
     <div class="container">
-        <header class="header">
+        <header>
             <div class="header-container">
                 <div class="blogName">
                     <a href="./">
                         <?php echo SITE_NAME ?>
                     </a>
                 </div>
-                <div class="socialMedia">
-
-                </div>
+                <a href="login.php" id="login-btn">Login</a>
             </div>
         </header>
 
