@@ -6,7 +6,7 @@ try {
 } catch (PDOException $ex) {
     echo "connection failed : " . $ex->getMessage();
 }
-
+$storage = null;
 function GetPersons($pageNumber = 1, $pageSize = 20, $searchQuery = null)
 {
     global $pdo;
@@ -30,13 +30,14 @@ function GetPersons($pageNumber = 1, $pageSize = 20, $searchQuery = null)
             $params[':lname'] = "%{$searchQuery['lName']}%";
             // $cmd->bindValue(':search_lname', $searchQuery['lname']);
         }
-        $query .= ' WHERE ' . implode(' OR ', $pQuery);
+        if (!empty($pQuery))
+            $query .= ' WHERE ' . implode(' OR ', $pQuery);
     }
 
     $query .= " LIMIT :offset, :pageSize";
 
     $cmd = $pdo->prepare($query);
-    if (!empty($searchQuery))
+    if (!empty($params))
         foreach ($params as $k => $v) {
             if (is_int($v))
                 $cmd->bindValue($k, $v, PDO::PARAM_INT);
