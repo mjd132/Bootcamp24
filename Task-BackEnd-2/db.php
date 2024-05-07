@@ -6,13 +6,14 @@ try {
 } catch (PDOException $ex) {
     echo "connection failed : " . $ex->getMessage();
 }
-$storage = null;
+
 function GetPersons($pageNumber = 1, $pageSize = 20, $searchQuery = null)
 {
+    //init variables
     global $pdo;
     $offset = ($pageNumber - 1) * $pageSize;
     $query = "SELECT * FROM persons ";
-
+    // check conditions and assign query 
     if ($searchQuery) {
         if (!empty($searchQuery['nationalId'])) {
             $pQuery[] = "`National Id`=:nationalId";
@@ -28,15 +29,17 @@ function GetPersons($pageNumber = 1, $pageSize = 20, $searchQuery = null)
         if (!empty($searchQuery['lName'])) {
             $pQuery[] = " `Last Name` LIKE :lname ";
             $params[':lname'] = "%{$searchQuery['lName']}%";
-            // $cmd->bindValue(':search_lname', $searchQuery['lname']);
+
         }
+        //aggregate conditions query
         if (!empty($pQuery))
             $query .= ' WHERE ' . implode(' OR ', $pQuery);
     }
-
+    //add limit query for pagination
     $query .= " LIMIT :offset, :pageSize";
 
     $cmd = $pdo->prepare($query);
+    // binding values to parameters
     if (!empty($params))
         foreach ($params as $k => $v) {
             if (is_int($v))
@@ -44,12 +47,13 @@ function GetPersons($pageNumber = 1, $pageSize = 20, $searchQuery = null)
             elseif (is_string($v))
                 $cmd->bindValue($k, $v);
         }
+
     $cmd->bindParam(':offset', $offset, PDO::PARAM_INT);
     $cmd->bindParam(':pageSize', $pageSize, PDO::PARAM_INT);
-
+    // execute query and get data
     $cmd->execute();
-    $results['data'] = $cmd->fetchAll(PDO::FETCH_ASSOC);
-    $results['pageNumber'] = $pageNumber;
+    $results = $cmd->fetchAll(PDO::FETCH_ASSOC);
+
     return $results;
 }
 
