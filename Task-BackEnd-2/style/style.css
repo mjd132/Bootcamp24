@@ -1,0 +1,63 @@
+* {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+input {
+  all: initial;
+  border-bottom: 1px solid #888;
+  transition: 0.5s;
+  padding: 4px;
+  margin-inline: 16px;
+}
+input:focus-visible {
+  border-bottom: 1px solid #111;
+}
+input::placeholder {
+  font-family: Arial, sans-serif;
+  font-size: small;
+}
+input:focus::placeholder {
+  color: transparent;
+}
+input[type="number"] {
+  width: 100px;
+}
+button {
+  height: 30px;
+  padding-inline: 16px;
+  background-color: transparent;
+  border: 1px solid green;
+  border-radius: 8px;
+  font-weight: 600;
+}
+button:hover {
+  background-color: #46ffa6;
+}
+button:disabled {
+  border: 1px solid #ddd;
+}
+button:disabled:hover {
+  background-color: transparent;
+}
+.page-nav {
+  margin-block: 32px;
+}
+.data-container {
+  width: 100%;
+}
+.data-container table {
+  margin: auto;
+}
+th {
+  padding: 16px;
+}
+td {
+  padding-block: 4px;
+}
+tr:nth-child(odd) {
+  background-color: #ccc;
+}
+.notFound-message {
+  color: red;
+  font-size: large;
+}

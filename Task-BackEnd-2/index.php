@@ -2,9 +2,6 @@
 require_once './db.php';
 
 $pageNumber = isset($_POST['page']) ? (int) $_POST['page'] : 1;
-
-
-// if (!isset($searchQuery))
 $searchQuery = null;
 
 
@@ -34,6 +31,7 @@ $sResult = GetPersons($pageNumber, 20, $searchQuery);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/style.css">
     <title>Persons</title>
 </head>
 
@@ -59,35 +57,39 @@ $sResult = GetPersons($pageNumber, 20, $searchQuery);
         </div>
     </form>
 
-    <div>
-        <table>
-            <thead>
-                <th>No.</th>
-                <th>National Id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Phone Number</th>
+    <div class="data-container" >
+        <?php if (!empty($sResult)): ?>
+            <table>
+                <thead>
+                    <th>No.</th>
+                    <th>National Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
 
 
-            </thead>
-            <tbody>
-                <?php foreach ($sResult['data'] as $fieldName => $fieldValue): ?>
-                    <tr>
-                        <td> <?php echo $fieldName + 1 ?> </td>
-                        <td> <?php echo htmlspecialchars($fieldValue['National Id']) ?> </td>
-                        <td> <?php echo htmlspecialchars($fieldValue['First Name']) ?> </td>
-                        <td> <?php echo htmlspecialchars($fieldValue['Last Name']) ?> </td>
-                        <td> <?php echo htmlspecialchars($fieldValue['PhoneNumber']) ?> </td>
+                </thead>
+                <tbody>
+                    <?php foreach ($sResult as $fieldName => $fieldValue): ?>
+                        <tr>
+                            <td> <?php echo $fieldName + 1 ?> </td>
+                            <td> <?php echo htmlspecialchars($fieldValue['National Id']) ?> </td>
+                            <td> <?php echo htmlspecialchars($fieldValue['First Name']) ?> </td>
+                            <td> <?php echo htmlspecialchars($fieldValue['Last Name']) ?> </td>
+                            <td> <?php echo htmlspecialchars($fieldValue['PhoneNumber']) ?> </td>
 
 
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <span>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
 
-        </span>
-
+            
+            <?php else: ?>
+                <div class="notFound-message">
+                No data found!
+                </div>
+            <?php endif; ?>
     </div>
 </body>
 
