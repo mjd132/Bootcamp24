@@ -58,7 +58,7 @@ function GetPersons($pageNumber = 1, $pageSize = 20, $searchQuery = null)
         }
         //aggregate conditions query
         if (!empty($pQuery))
-            $query .= ' WHERE ' . implode(' OR ', $pQuery);
+            $query .= ' WHERE ' . implode(' AND ', $pQuery);
     }
     //add limit query for pagination
     $query .= " LIMIT :offset, :pageSize";
