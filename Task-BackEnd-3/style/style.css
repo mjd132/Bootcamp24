@@ -1,0 +1,85 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+input {
+  all: initial;
+  border-bottom: 1px solid #888;
+  transition: 0.5s;
+  padding: 4px;
+  margin-inline: 16px;
+}
+input:focus-visible {
+  border-bottom: 1px solid #111;
+}
+
+a > div {
+  all: initial;
+  padding-inline: 16px;
+  padding-block: 6px;
+  border-radius: 5px;
+  border: 1px solid;
+  height: fit-content;
+  width: fit-content;
+  cursor: pointer;
+  background-color: #ddd;
+}
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 10%;
+  border-bottom: 1px solid;
+}
+.bnt-container {
+  display: flex;
+  gap: 10px;
+}
+.flx-p {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  height: 100vh;
+}
+.login-container {
+  width: 400px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  height: 90vh;
+  max-height: 400px;
+  margin: auto;
+  border-radius: 10px;
+  border: 1px solid;
+}
+
+button {
+  height: 30px;
+  padding-inline: 16px;
+  background-color: transparent;
+  border: 1px solid green;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.login-container form div {
+  margin: 8px auto;
+}
+.login-container button {
+  margin: auto;
+}
+.input-flx {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+#lgn-btn {
+  margin-top: 46px;
+  display: flex;
+  justify-content: center;
+}
+p {
+  font-size: 12px;
+}
