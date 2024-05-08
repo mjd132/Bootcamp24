@@ -1,8 +1,33 @@
 <?php
 
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=big_data", 'root', '');
+    $pdo = new PDO("mysql:host=localhost", 'root', '');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $pdo->exec("CREATE DATABASE IF NOT EXISTS big_data");
+    $pdo->exec("USE big_data");
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS persons (
+        `National Id` INT AUTO_INCREMENT PRIMARY KEY,
+        `First Name` VARCHAR(255) NULL,
+        `Last Name` VARCHAR(255) NOT NULL,
+        `PhoneNumber` VARCHAR(20) NULL);");
+
+    $cmd = $pdo->query("SELECT COUNT(*) FROM persons");
+    if ($cmd->fetchColumn() === 0) {
+
+        $ct = str_replace("\\", "\\\\", __DIR__) . "\\\\data.csv";
+        $pdo->exec("
+        LOAD DATA INFILE '$ct'
+        INTO TABLE persons
+        FIELDS TERMINATED BY ',' ENCLOSED BY '\"'
+        LINES TERMINATED BY '\\n'
+        IGNORE 1 LINES
+        (`First Name`, `Last Name`, `PhoneNumber`);");
+    }
+
+
+
 } catch (PDOException $ex) {
     echo "connection failed : " . $ex->getMessage();
 }
