@@ -1,6 +1,7 @@
 <?php
 require_once "Crawler.php";
 require_once "output.php";
+
 ob_implicit_flush(true);
 
 const LIMIT_PAGES_PROCESSING = 10, LIMIT_RETRIEVE_TIMES = 6;
@@ -45,8 +46,16 @@ for ($i = 0; $i < LIMIT_RETRIEVE_TIMES; $i++) {
     $newUrls = array_unique(array_diff($newUrls, $pUrls));
 
 }
-
-
+echo '<table border="1">';
+echo '<tr><th>Title</th><th>Link</th><th>Count of image</th><th>Count of words</th></tr>';
+foreach ($resultData as $row) {
+    echo '<tr>';
+    foreach ($row as $value) {
+        echo '<td>' . $value . '</td>';
+    }
+    echo '</tr>';
+}
+echo '</table>';
 
 function loadPages($pageUrls, $countPage = LIMIT_PAGES_PROCESSING)
 {
@@ -61,4 +70,3 @@ function loadPages($pageUrls, $countPage = LIMIT_PAGES_PROCESSING)
 
     return $allPages;
 }
-
