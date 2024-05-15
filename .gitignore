@@ -13,6 +13,7 @@ ehthumbs_vista.db
 *.stackdump
 # composer
 vendor/
+
 # Folder config file
 [Dd]esktop.ini
 
