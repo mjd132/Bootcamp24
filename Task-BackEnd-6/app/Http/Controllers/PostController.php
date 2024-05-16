@@ -37,7 +37,7 @@ class PostController extends Controller
 
         Post::create($validatedData);
 
-        return redirect()->route('post.index')->with('success', 'Post created successfully.');
+        return redirect()->route('post.index')->with('message', 'Post created successfully.');
     }
 
     /**
@@ -68,7 +68,7 @@ class PostController extends Controller
 
         $post->update($validatedData);
 
-        return redirect()->route('post.index')->with('success', 'Post updated successfully.');
+        return redirect()->route('post.index')->with('message', 'Post updated successfully.');
     }
 
     /**
@@ -77,6 +77,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('post.index')->with('success', 'Post deleted.');
+        return redirect()->route('post.index')->with('message', 'Post deleted successfully.');
     }
 }
