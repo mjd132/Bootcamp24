@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -13,27 +13,13 @@
 
 </head>
 
-<body class="bg-dark text-white">
-    @session('message')
-        <div class="m-3 alert alert-success">
-            {{ session('message') }}
-        </div>
-    @endsession
-    <header class="border-bottom mb-4">
-        <div class="container p-2 d-flex justify-content-between">
-            <h2 class="">Majid Blog</h3>
-                <div>
-                    <a class="btn btn-warning" href="#" role="button">Login</a>
-                    <a class="btn btn-primary" href="#" role="button">Signup</a>
-
-                </div>
-        </div>
-
-    </header>
+<body class=" ">
+    <x-alert />
     {{ $slot }}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>

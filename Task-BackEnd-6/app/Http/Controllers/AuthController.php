@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -14,14 +15,21 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-        $user = User::create($request->all);
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
+        $user = User::create($validator->getData());
+
+
+        // return back()->with(['error' => 'A user with this email has already registered!']);
+        // return back()->with(['message' => $user->wasRecentlyCreated]);
         Auth::login($user);
-        return redirect('post.index');
+        return to_route('post.index');
     }
     public function loginPage()
     {
@@ -29,19 +37,20 @@ class AuthController extends Controller
     }
     public function login(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
         ]);
-        if (Auth::attempt($request->only('email', 'password'))) {
-            return redirect()->intended('post.index');
-        }
-        return back()->withErrors(['error' => 'Email or Password not correct!']);
+
+        if (Auth::attempt($validatedData))
+            return redirect()->route('post.index');
+
+        return back()->with(['error' => 'Email or Password not correct!']);
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect('post.index');
+        return to_route('post.index');
     }
 }
